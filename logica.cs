@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-class Logica {
+class Logica
+{
 
   static void Main()
   {
@@ -18,7 +19,7 @@ class Logica {
     Console.WriteLine("Enter LaTeX expression:");
     string latexString = Console.ReadLine();
     latexString = latexString.ToLower();
-    Console.WriteLine("The LaTeX string is:"+ latexString);
+    Console.WriteLine("The LaTeX string is:" + latexString);
 
     string normalString = latexString;
 
@@ -30,6 +31,25 @@ class Logica {
     }
 
     Console.WriteLine("The base string is: " + normalString);
+
+    Console.WriteLine("Next, the operators priority will be selected.");
+
+    SortedList<int, string> orderOperator = new SortedList<int, string>();
+
+    foreach (var latexOperator in latexSyntax)
+    {
+      Console.WriteLine("Enter the priority for operator " + latexOperator.Key);
+
+      orderOperator.Add(int.Parse(Console.ReadLine()), latexOperator.Key);
+
+
+    }
     
+    Console.WriteLine("Here is the final order: " + normalString);
+
+    foreach (var temp in orderOperator)
+    {
+      Console.WriteLine(temp.Key + ": " + temp.Value);
+    }
   }
 }
