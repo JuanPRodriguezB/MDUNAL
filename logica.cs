@@ -44,12 +44,36 @@ class Logica
 
 
     }
-    
+
     Console.WriteLine("Here is the final order: " + normalString);
 
     foreach (var temp in orderOperator)
     {
       Console.WriteLine(temp.Key + ": " + temp.Value);
     }
+
+    //Console.WriteLine("By default, the program will reformulate the equation from left to right."
+    //+"\n Should the program do so from right to left? (y/n): ");
+    //switch(Console.ReadLine())
+
+    //Console.WriteLine("Working on it...");
+
+    /*
+    for (int i = 1; i <= 4; i = i++) 
+    {
+        
+        int stringLength = normalString.Length;
+        for (int j=0; j<=stringLength; j=j++);
+        {
+            
+        }
+        
+        Console.WriteLine(temp.Key + ": " + temp.Value);
+        Console.WriteLine(i);
+        
+        
+    }
+    */
+
   }
 }
