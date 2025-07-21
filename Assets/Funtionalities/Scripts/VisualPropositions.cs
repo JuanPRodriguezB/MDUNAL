@@ -8,6 +8,7 @@ public class VisualPropositions : MonoBehaviour
 {
     public static VisualPropositions Instance;
 
+    
 
     public List<string> NextSymbolList;
 
@@ -31,9 +32,3 @@ public class VisualPropositions : MonoBehaviour
 
 }
 
-public enum connectors
-{
-    Neg,
-    AndOr,
-    Implication
-}

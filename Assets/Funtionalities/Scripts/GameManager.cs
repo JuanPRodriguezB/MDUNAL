@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     public void ToMain()
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     public void ToInGame()
     {
         currentMenu = Menus.InGame;
+        SceneManager.LoadScene(1);
     }
 
     public void ToLost()

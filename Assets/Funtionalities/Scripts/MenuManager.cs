@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class MenuManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -39,6 +41,7 @@ public class MenuManager : MonoBehaviour
             InGameMenu.SetActive(true);
             WinMenu.SetActive(false);
             LostMenu.SetActive(false);
+            
         }
         else if (GameManager.instance.currentMenu == Menus.Lost)
         {

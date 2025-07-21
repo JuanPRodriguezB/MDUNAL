@@ -6,16 +6,24 @@ public class Proposition : MonoBehaviour
 {
     public static Proposition Instance;
 
+    [SerializeField] int count = 10;
+    [SerializeField] int buCount = 10;
+
     [Header("Expresión lógica original")]
     [TextArea(2, 5)]
     public string originalExpression = "¬P ∧ Q ⇒ R";
+
+    public List<string> strings = new List<string>();
 
     [Header("Componente TextMeshPro para mostrar el resultado")]
     public TextMeshProUGUI targetText;
 
     private string currentExpression;
     [SerializeField] private Queue<string> hiddenSymbols = new Queue<string>();
+    [SerializeField] public List<string> intialHiddenSymbols = new List<string>();
     private const string placeholder = "(___)";
+
+    public Queue<string> HiddenSymbols { get => hiddenSymbols; set => hiddenSymbols = value; }
 
     private void Awake()
     {
@@ -27,31 +35,79 @@ public class Proposition : MonoBehaviour
         {
             Destroy(this);
         }
-    }
+        targetText = GameObject.FindGameObjectWithTag("T").GetComponent<TextMeshProUGUI>();
 
-    void OnEnable()
-    {
+        originalExpression = strings[Random.Range(0, strings.Count)];
         ProcessExpression();
         UpdateText();
     }
 
+    void Start()
+    {
+    }
+
+    private void Update()
+    {
+        if (HiddenSymbols.Count <= 0)
+        {
+            count--;
+            originalExpression = strings[Random.Range(0, strings.Count)];
+            ProcessExpression();
+            UpdateText();
+            VisualCardPos.Instance.numberOfCards = Proposition.Instance.intialHiddenSymbols.Count;
+            VisualCardPos.Instance.SpawnHand();
+            HealthCounter.Instance.currentLife = (int)HealthCounter.Instance.healthBar.MaxValue;
+            HealthCounter.Instance.healthBar.UpdateBar(HealthCounter.Instance.currentLife);
+        }
+        if (count <= 0)
+        {
+            count = buCount;
+            GameManager.instance.ToWin();
+        }
+    }
+
+    public void checkCorrectCard(string cardSimbol)
+    {
+        if (cardSimbol == HiddenSymbols.Peek())
+        {
+            RevealNextSymbol();
+        }
+    }
+
     /// <summary>
-    /// Procesa el string original: guarda los símbolos y los reemplaza por (___)
+    /// Procesa el string original: guarda los símbolos y los reemplaza por (___),
+    /// en el orden en que aparecen en el string original.
     /// </summary>
     public void ProcessExpression()
     {
-        hiddenSymbols.Clear();
+        HiddenSymbols.Clear();
+        currentExpression = "";
 
         string[] logicSymbols = { "¬", "∧", "∨", "⇒", "⇔" };
-        currentExpression = originalExpression;
+        int i = 0;
 
-        foreach (string symbol in logicSymbols)
+        while (i < originalExpression.Length)
         {
-            int index;
-            while ((index = currentExpression.IndexOf(symbol)) != -1)
+            bool matched = false;
+
+            // Verifica si alguno de los símbolos lógicos inicia en la posición actual
+            foreach (string symbol in logicSymbols)
             {
-                currentExpression = currentExpression.Substring(0, index) + placeholder + currentExpression.Substring(index + symbol.Length);
-                hiddenSymbols.Enqueue(symbol);
+                if (originalExpression.Substring(i).StartsWith(symbol))
+                {
+                    HiddenSymbols.Enqueue(symbol);
+                    intialHiddenSymbols.Add(symbol);
+                    currentExpression += placeholder;
+                    i += symbol.Length;
+                    matched = true;
+                    break;
+                }
+            }
+
+            if (!matched)
+            {
+                currentExpression += originalExpression[i];
+                i++;
             }
         }
     }
@@ -61,9 +117,9 @@ public class Proposition : MonoBehaviour
     /// </summary>
     public void RevealNextSymbol()
     {
-        if (hiddenSymbols.Count > 0 && currentExpression.Contains(placeholder))
+        if (HiddenSymbols.Count > 0 && currentExpression.Contains(placeholder))
         {
-            string symbolToInsert = hiddenSymbols.Dequeue();
+            string symbolToInsert = HiddenSymbols.Dequeue();
             int index = currentExpression.IndexOf(placeholder);
             currentExpression = currentExpression.Remove(index, placeholder.Length).Insert(index, symbolToInsert);
             UpdateText();
@@ -77,7 +133,7 @@ public class Proposition : MonoBehaviour
     /// <summary>
     /// Actualiza el texto mostrado en el TextMeshPro
     /// </summary>
-    private void UpdateText()
+    public void UpdateText()
     {
         if (targetText != null)
         {

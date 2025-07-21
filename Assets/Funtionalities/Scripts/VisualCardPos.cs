@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class VisualCardPos : MonoBehaviour
 {
+    public static VisualCardPos Instance;
+
     [Header("Prefab de la carta")]
     public GameObject cardPrefab;
 
@@ -14,12 +17,27 @@ public class VisualCardPos : MonoBehaviour
     [Header("Altura desde la parte inferior de la pantalla (en unidades world)")]
     public float verticalOffset = 1.5f;
 
+    public List<GameObject> cards = new List<GameObject>();
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     void Start()
     {
+        numberOfCards = Proposition.Instance.intialHiddenSymbols.Count;
         SpawnHand();
     }
 
-    void SpawnHand()
+    public void SpawnHand()
     {
         if (cardPrefab == null || numberOfCards <= 0)
         {
@@ -42,7 +60,13 @@ public class VisualCardPos : MonoBehaviour
             float x = startX + i * (cardWidth * spacing);
             Vector3 spawnPosition = new Vector3(x, center.y + verticalOffset, 0f);
 
-            Instantiate(cardPrefab, spawnPosition, Quaternion.identity, transform);
+            cards.Add(
+                Instantiate(
+                    cardPrefab, 
+                    spawnPosition, 
+                    Quaternion.identity, 
+                    transform)
+                );
         }
     }
 }
