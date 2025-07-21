@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
+
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    //Maneja que ocurre con los menus en cada estado de juego
+
     public static MenuManager instance;
 
     public GameObject mainMenu;

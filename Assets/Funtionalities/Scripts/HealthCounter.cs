@@ -1,14 +1,13 @@
 using Microlight.MicroBar;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class HealthCounter : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
-    public static HealthCounter Instance;
-    [SerializeField] public MicroBar healthBar;
-    [SerializeField] public TextMeshProUGUI score;
+    public static ScoreManager Instance; //singleton
+
+    [SerializeField] public MicroBar healthBar; //Clase de la barra de vida
+    [SerializeField] public TextMeshProUGUI score; //texto con el puntaje
     [SerializeField] public int currentLife;
 
     [Header("Puntaje actual")]
@@ -42,6 +41,8 @@ public class HealthCounter : MonoBehaviour
 
     private void Start()
     {
+        //consigue los gameObjects que existan en pantalla de tipo healthBar y score
+
         healthBar = GameObject.FindGameObjectWithTag("H").GetComponent<MicroBar>();
         score = GameObject.FindGameObjectWithTag("S").GetComponent<TextMeshProUGUI>();
         Init();
@@ -49,14 +50,15 @@ public class HealthCounter : MonoBehaviour
 
     private void Init()
     {
-        healthBar.Initialize(3);
-        currentLife = 3;
-        points = 0;
-        score.text = "score: 0";
+        healthBar.Initialize(3);    //inicializa la barra de vida
+        currentLife = 3;            //añade vida maxima
+        points = 0;                 //inicializa puntos iniciales
+        score.text = "score: 0";    //actualiza puntos en pantalla
     }
 
     private void Update()
     {
+        //si se acaba la vida o se acaba el tiempo 
         if (currentLife <= 0 || TimeLeft.instance.TimeLeftInClock <= 0f)
         {
             Init();

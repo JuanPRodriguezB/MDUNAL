@@ -4,10 +4,12 @@ using TMPro;
 
 public class Proposition : MonoBehaviour
 {
+    //Esta clase elige una formula bien formada,
+    
     public static Proposition Instance;
 
-    [SerializeField] int count = 10;
-    [SerializeField] int buCount = 10;
+    [SerializeField] int count = 2;
+    [SerializeField] int buCount = 2;
 
     [Header("Expresión lógica original")]
     [TextArea(2, 5)]
@@ -56,12 +58,13 @@ public class Proposition : MonoBehaviour
             UpdateText();
             VisualCardPos.Instance.numberOfCards = Proposition.Instance.intialHiddenSymbols.Count;
             VisualCardPos.Instance.SpawnHand();
-            HealthCounter.Instance.currentLife = (int)HealthCounter.Instance.healthBar.MaxValue;
-            HealthCounter.Instance.healthBar.UpdateBar(HealthCounter.Instance.currentLife);
+            ScoreManager.Instance.currentLife = (int)ScoreManager.Instance.healthBar.MaxValue;
+            ScoreManager.Instance.healthBar.UpdateBar(ScoreManager.Instance.currentLife);
         }
         if (count <= 0)
         {
             count = buCount;
+            GUIUtility.systemCopyBuffer = LatexFunctions.Instance.CreateLatexFromFormula(originalExpression);
             GameManager.instance.ToWin();
         }
     }

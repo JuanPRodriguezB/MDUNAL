@@ -1,8 +1,5 @@
-﻿using Microlight.MicroBar;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardController : MonoBehaviour
@@ -106,7 +103,7 @@ public class CardController : MonoBehaviour
 
     private void CorrectCardSelected()
     {
-        pointsAdded = HealthCounter.Instance.RegisterCorrectAnswer(TimeLeft.instance.TimeElapsedSinceLastWin);
+        pointsAdded = ScoreManager.Instance.RegisterCorrectAnswer(TimeLeft.instance.TimeElapsedSinceLastWin);
         AddedPoints.text = "+" + pointsAdded.ToString();
         animator.SetBool("win", true);
         animator.SetBool("click", false);
@@ -114,7 +111,7 @@ public class CardController : MonoBehaviour
         animator.SetBool("wrong", false);
         animator.SetBool("idle", false);
         TimeLeft.instance.TimeElapsedSinceLastWin = 0;
-        HealthCounter.Instance.score.text = "score: " + HealthCounter.Instance.points.ToString();
+        ScoreManager.Instance.score.text = "score: " + ScoreManager.Instance.points.ToString();
     }
 
     private void WrongCardSelected()
@@ -124,11 +121,11 @@ public class CardController : MonoBehaviour
         animator.SetBool("MouseOver", false);
         animator.SetBool("win", false);
         animator.SetBool("idle", false);
-        HealthCounter.Instance.points -= 500;
+        ScoreManager.Instance.points -= 500;
         TimeLeft.instance.TimeElapsedSinceLastWin = 0;
-        HealthCounter.Instance.score.text = "score: " + HealthCounter.Instance.points.ToString();
-        HealthCounter.Instance.currentLife -= 1;
-        HealthCounter.Instance.healthBar.UpdateBar(HealthCounter.Instance.currentLife);
+        ScoreManager.Instance.score.text = "score: " + ScoreManager.Instance.points.ToString();
+        ScoreManager.Instance.currentLife -= 1;
+        ScoreManager.Instance.healthBar.UpdateBar(ScoreManager.Instance.currentLife);
     }
 
     private void OnMouseDrag()
