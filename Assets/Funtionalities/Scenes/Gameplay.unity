@@ -198,11 +198,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7327055181470727891, guid: 66abf074c4f88ff40a8a3870c1fa064b, type: 3}
       propertyPath: count
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7327055181470727891, guid: 66abf074c4f88ff40a8a3870c1fa064b, type: 3}
       propertyPath: buCount
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7327055181470727891, guid: 66abf074c4f88ff40a8a3870c1fa064b, type: 3}
       propertyPath: strings.Array.size
