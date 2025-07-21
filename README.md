@@ -47,4 +47,4 @@ Si bien el núcleo lógico del juego fue desarrollado con éxito, quedaron pendi
 2.  Ejecutar:
     * Para Windows: En la carpeta build* encontrará un ejecutable con el cual iniciará el juego.
 
-# 🧾[MANUAL.md](MANUAL.md)
+# 🧾[MANUAL.md](Manual.pdf)
