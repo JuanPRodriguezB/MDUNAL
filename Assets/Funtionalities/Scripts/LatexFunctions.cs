@@ -19,7 +19,8 @@ class LatexFunctions : MonoBehaviour
             { "∨", " \\lor " },
             { "→", " \\implies " },
             { "⇒", " \\implies " },
-            { "↔", " \\iff " }
+            { "↔", " \\iff " },
+            { "⇔", " \\iff " }
         };
     }
 
@@ -53,6 +54,9 @@ class LatexFunctions : MonoBehaviour
                     break;
                 case "⇒":
                     latexString = latexString + " \\implies ";
+                    break;
+                case "↔":
+                    latexString = latexString + " \\iff ";
                     break;
                 case "↔":
                     latexString = latexString + " \\iff ";
