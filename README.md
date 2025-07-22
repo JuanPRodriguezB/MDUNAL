@@ -43,8 +43,8 @@ Si bien el núcleo lógico del juego fue desarrollado con éxito, quedaron pendi
 ## Cómo ejecutar el proyecto
 
 
-1.  Clonar o descargar el repositorio.
-2.  Ejecutar:
-    * Para Windows: En la carpeta build* encontrará un ejecutable con el cual iniciará el juego.
+1.  Descargar el ultimo [Release](https://github.com/JuanPRodriguezB/MDUNAL/releases/).
+2.  Descomprimir ¬(Time To Lvgic).zip
+3.  Ejecutar: discretas project.exe
 
-# 🧾[MANUAL.md](Manual.pdf)
+# 🧾[MANUAL](Manual.pdf)
