@@ -44,7 +44,7 @@ Si bien el núcleo lógico del juego fue desarrollado con éxito, quedaron pendi
 
 
 1.  Descargar el ultimo [Release](https://github.com/JuanPRodriguezB/MDUNAL/releases/).
-2.  Descomprimir ¬(Time To Lvgic).zip
+2.  Descomprimir Time.To.Lvgic.zip
 3.  Ejecutar: discretas project.exe
 
 # 🧾[MANUAL](Manual.pdf)
